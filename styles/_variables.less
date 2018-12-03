@@ -1,0 +1,44 @@
+.respondTo(@_device, @_content) {
+  & when (@_device = phones) {
+    @media all and (max-width: 479px) { @_content(); }
+  }
+  & when (@_device = wide-phones) {
+    @media all and (min-width: 480px) and (max-width: 767px) { @_content(); }
+  }
+  & when (@_device = tablets) {
+    @media all and (min-width: 768px) and (max-width: 991px) { @_content(); }
+  }
+  & when (@_device = small-desktops) {
+    @media all and (min-width: 992px) and (max-width: 1199px) { @_content(); }
+  }
+  & when (@_device = lg-desktops) {
+    @media all and (min-width: 1200px) and (max-width: 1440px) { @_content(); }
+  }
+  & when (@_device = xlg-desktops) {
+    @media all and (min-width: 1441px) and (max-width: 1920px) { @_content(); }
+  }
+}
+
+.customRespond(@_minWidth, @_maxWidth, @_styles) {
+  @media all and (min-width: @_minWidth) and (max-width: @_maxWidth) {
+    @_styles();
+  }
+}
+
+@lightColor: #fff;
+
+.mobilesOnly {
+  display: none;
+
+  .customRespond(0, 767px, {
+    display: block;
+  });
+}
+
+.exceptMobiles {
+  display: block;
+
+  .customRespond(0, 767px, {
+    display: none;
+  });
+}
